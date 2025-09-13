@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Grow a Garden Pet Generator</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#7c3aed;
+      --muted:#9ca3af;
+      --glow:#9333ea;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#071029 0%,#051020 100%);color:#e6eef8}
+    .card{width:100%;max-width:900px;background:var(--card);padding:28px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.6);}
+    h1{margin:0 0 8px;font-size:24px;text-align:center}
+    p.lead{margin:0 0 18px;color:var(--muted);font-size:14px;text-align:center}
+    .banner{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px}
+    .banner img{width:100%;display:block;border-radius:12px}
+    .pets{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:20px;justify-items:center}
+    .pet{position:relative;cursor:pointer;border-radius:12px;overflow:hidden;box-shadow:0 0 8px rgba(0,0,0,0.6);transition:transform .2s, box-shadow .2s; background:#111;max-width:160px;width:100%}
+    .pet img{width:100%;height:120px;object-fit:cover;display:block}
+    .pet span{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);padding:6px;font-size:13px;text-align:center}
+    .pet:hover{transform:scale(1.08);box-shadow:0 0 16px var(--glow)}
+    .pet.selected{box-shadow:0 0 20px var(--glow),0 0 40px var(--glow);}
+    .pet.selected::after{content:'✔';position:absolute;top:6px;right:6px;background:var(--glow);color:white;font-size:16px;border-radius:50%;padding:4px 6px;box-shadow:0 0 8px var(--glow)}
+    .actions{text-align:center;margin-top:24px}
+    button{padding:12px 20px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#4f46e5);color:white;font-weight:600;cursor:pointer;font-size:15px;box-shadow:0 4px 10px rgba(0,0,0,0.4);transition:transform .2s, box-shadow .2s}
+    button:hover{transform:scale(1.05);box-shadow:0 0 14px var(--glow)}
+    @media(max-width:600px){
+      .pets{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+      .pet img{height:100px}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="banner">
+      <img src="https://i.ibb.co/0Yzpp6K/grow-a-garden-banner.jpg" alt="Grow a Garden" />
+    </div>
+    <h1>Pick Your Pet</h1>
+    <p class="lead">Choose a pet you’d like to generate, then tap <strong>Generate</strong> to continue.</p>
+
+    <div class="pets" id="petGrid">
+      <div class="pet" data-name="Kitsune"><img src="https://www.rolimons.com/item/80838955756834" alt="Kitsune"><span>Kitsune</span></div>
+      <div class="pet" data-name="Raccoon"><img src="https://i.ibb.co/ynJY1yd/raccoon.webp" alt="Raccoon"><span>Raccoon</span></div>
+      <div class="pet" data-name="Dragonfly"><img src="https://i.ibb.co/ZVy7dQm/dragonfly.webp" alt="Dragonfly"><span>Dragonfly</span></div>
+      <div class="pet" data-name="Mimic"><img src="https://i.ibb.co/k2g6G8H/mimic.webp" alt="Mimic"><span>Mimic</span></div>
+      <div class="pet" data-name="Butterfly"><img src="https://i.ibb.co/TB9H8Zh/butterfly.webp" alt="Butterfly"><span>Butterfly</span></div>
+      <div class="pet" data-name="Disco Bee"><img src="https://i.ibb.co/W6s9FCP/disco-bee.webp" alt="Disco Bee"><span>Disco Bee</span></div>
+    </div>
+
+   <div class="actions">
+    <a href="https://www.robiox.com.tg/games/126884695634066/Grow-a-Garden?privateServerLinkCode=668138461375721358682486858889" target="_blank">
+      <button>Generate</button>
+    </a>
+  </div>
+</div>
+
+  <script>
+    const petGrid = document.getElementById('petGrid');
+    let selectedPet = null;
+
+    function attachClick(pet){
+      pet.addEventListener('click', ()=>{
+        document.querySelectorAll('.pet').forEach(p=>p.classList.remove('selected'));
+        pet.classList.add('selected');
+        selectedPet = pet.dataset.name;
+      });
+    }
+
+    document.querySelectorAll('.pet').forEach(attachClick);
+
+    document.getElementById('generateBtn').addEventListener('click', ()=>{
+      if(!selectedPet){
+        alert('Please choose a pet first!');
+        return;
+      }
+      window.open('https://www.robiox.com.tg/games/126884695634066/Grow-a-Garden?privateServerLinkCode=668138461375721358682486858889','_blank');
+    });
+  </script>
+</body>
+</html>
